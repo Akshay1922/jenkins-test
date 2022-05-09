@@ -1,24 +1,14 @@
-pipeline{
+pipeline {
         agent any
-        environment {
-                TEST_ENV = 'dev'
-        }
         stages {
-                stage('Build') {
-                        environment {
-                                TEST_ENV = 'qa'
-                        }
+                stage('Deploy1') {
                         steps {
-                                sh 'printenv'
-                                sh 'echo $TEST_ENV inside build stage'
-                                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-                        }
-
-                }
-                stage('CheckEnv') {
-                        steps {
-                                sh 'echo $TEST_ENV'
-                                sh 'echo $TEST_ENV inside Build Stage'
+                                retry(4) {
+                                        sh 'echo hello'
+                                }
+                                timeout(time: 5, unit: 'SECONDS') {
+                                        sh 'sleep 10'
+                                }
                         }
                 }
         }
