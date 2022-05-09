@@ -18,6 +18,7 @@ pipeline{
                 stage('CheckEnv') {
                         steps {
                                 sh 'echo $TEST_ENV'
+                                sh 'echo $TEST_ENV inside Build Stage'
                         }
                 }
         }
