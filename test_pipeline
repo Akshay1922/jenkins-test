@@ -1,14 +1,24 @@
-pipeline {
-    agent any
-    stages {
-        stage('Build') {
-            steps {
-                sh 'echo "This is First Jenkins Pipeline"'
-                sh '''
-                    echo "This is step script"
-                    ls -ltr
-                '''
-            }
+pipeline{
+        agent any
+        environment {
+                TEST_ENV = 'dev'
         }
-    }
+        stages {
+                stage('Build') {
+                        environment {
+                                TEST_ENV = 'qa'
+                        }
+                        steps {
+                                sh 'printenv'
+                                sh 'echo $TEST_ENV inside build stage'
+                                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+                        }
+
+                }
+                stage('CheckEnv') {
+                        steps {
+                                sh 'echo $TEST_ENV'
+                        }
+                }
+        }
 }
