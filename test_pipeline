@@ -1,14 +1,14 @@
-pipeline {
+pipeline{
         agent any
+        environment {
+                secret = credentials('Test')
+                TEST_ENV = 'dev'
+        }
         stages {
-                stage('Deploy1') {
+                stage('Examole stage 1') {
                         steps {
-                                retry(4) {
-                                        sh 'echo hello'
-                                }
-                                timeout(time: 15, unit: 'SECONDS') {
-                                        sh 'sleep 10'
-                                }
+                                sh 'echo $secret'
+                                sh 'echo $TEST_ENV'
                         }
                 }
         }
