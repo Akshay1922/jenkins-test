@@ -1,15 +1,14 @@
-pipeline{
-        agent any
-        environment {
-                secret = credentials('Test')
-                TEST_ENV = 'dev'
+pipeline {
+agent any
+    stages {
+        stage('AWS Stage') {
+            environment {
+                AWS_ACCESS_KEY_ID = credentials('jenkins-aws-secret-key-id')
+                AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
+            }
+            steps {
+                sh 'aws s3 ls'
+            }
         }
-        stages {
-                stage('Examole stage 1') {
-                        steps {
-                                sh 'echo $secret'
-                                sh 'echo $TEST_ENV'
-                        }
-                }
-        }
+    }
 }
