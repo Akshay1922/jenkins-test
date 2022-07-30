@@ -7,6 +7,7 @@ pipeline {
                 echo 'This stage add after git webhook added.'
                 echo 'This stage add after git webhook added. 2nd'
                 echo 'This stage add after git webhook added. 3rd'
+                echo 'This stage add after git webhook added. 4th'
             }
         }
         stage('Test') {
