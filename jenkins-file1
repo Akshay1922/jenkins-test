@@ -5,7 +5,7 @@ pipeline {
             steps {
                 echo 'This is Build Stage.'
                 echo 'This stage add after git webhook added.'
-                echo '2 pipeline job need to be run.'
+                echo '2 pipeline job need to be run...'
             }
         }
         stage('Test') {
